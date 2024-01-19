@@ -1,0 +1,63 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_table_account
+      author: GMT
+      changes:
+        - createTable:
+            tableName: account
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: firstname
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lastname
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+              - column:
+                  name: datetime
+                  type: TIMESTAMP WITH TIMEZONE
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: create_table_operation
+      author: GMT
+      changes:
+        - createTable:
+            tableName: operation
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: account_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_account_operation
+                    referencedTableName: account
+                    referencedColumnNames: id
+              - column:
+                  name: operation_type
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+              - column:
+                  name: amount
+                  type: DOUBLE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: datetime
+                  type: TIMESTAMP WITH TIMEZONE
+                  constraints:
+                    nullable: false
